@@ -1,44 +1,109 @@
 <context>
+
 # Overview  
-[Provide a high-level overview of your product here. Explain what problem it solves, who it's for, and why it's valuable.]
+[
+This will be using FastAPI server. 
+I want to use uv package manager
+I want to use mongoDB.
+
+This is Backend API that controls the coupon system.
+There is admin and client. 
+Let's assume this is a cafe coupon. 
+Admin user can issue a coupon that when a client has 10 coupons they get 1 free coffee.
+
+So admin user can has many companies(cafes) and issue coupon for each organizations.
+a client can gather the coupon that company issued and they can get free coffee when they gather some coupons.
+
+a client user will get bar-code for each coupon and each coupon has some rules depoends on organizaiton setting.
+Some coupons can have a rule that 5 coupons = 1 coffee or 10 coupons = 1 cake like this.
+]
 
 # Core Features  
 [List and describe the main features of your product. For each feature, include:
-- What it does
-- Why it's important
-- How it works at a high level]
+- a client can gather the coupons that company issued
+- if coupons are issued via same company then coupons have same bar-code number
+- admin can issue the coupon and if a client has already a coupon they can raise the coupon number via bar-code
+- this is backend for both admin and client so there should be authentication for both
+- If coupons are met with the rule that company made and a client use it, coupon numbers shrink]
 
 # User Experience  
-[Describe the user journey and experience. Include:
-- User personas
-- Key user flows
-- UI/UX considerations]
-</context>
-<PRD>
-# Technical Architecture  
-[Outline the technical implementation details:
-- System components
-- Data models
-- APIs and integrations
-- Infrastructure requirements]
+[
+- **User Personas:**
+  - Admin: Manages companies (cafes), issues coupons, sets reward rules, views analytics.
+  - Client: Collects coupons, views coupon status, redeems rewards, authenticates via app or web.
+- **Key User Flows:**
+  - Admin logs in, creates/edits companies, issues coupons, sets rules (e.g., 10 coupons = 1 coffee), views issued coupons and redemptions.
+  - Client logs in, views available coupons, scans/receives barcodes, collects coupons, redeems rewards when requirements are met, views redemption history.
+  - Both user types authenticate securely (JWT or OAuth recommended).
+- **UI/UX Considerations:**
+  - Simple, intuitive interfaces for both admin and client.
+  - Mobile-friendly design for client coupon collection and barcode scanning.
+  - Clear feedback for coupon collection, redemption, and errors.
+  - Admin dashboard for managing companies, coupons, and analytics.
+  - Accessibility and localization support for future enhancements.
+]
+
+# Technical Architecture 
+[ 
+- **System Components:**
+  - FastAPI backend server
+  - MongoDB database
+  - Authentication system for admin and client users
+  - Barcode generation and validation logic
+  - pytest for testing TDD good!
+  - Also follow the FastAPI best practice
+- **Data Models:**
+  - User (admin/client, authentication info)
+  - Company (cafe/organization)
+  - Coupon (barcode, rule, company, client, status)
+  - CouponRule (company, required_coupons, reward)
+- **APIs and Integrations:**
+  - RESTful endpoints for coupon management, user authentication, company management
+  - Barcode API for coupon issuance and validation
+- **Infrastructure Requirements:**
+  - Deployable with uv package manager
+  - MongoDB instance
+  - FastAPI server hosting
+]
 
 # Development Roadmap  
-[Break down the development process into phases:
-- MVP requirements
-- Future enhancements
-- Do not think about timelines whatsoever -- all that matters is scope and detailing exactly what needs to be build in each phase so it can later be cut up into tasks]
+[
+- **MVP Requirements:**
+  - User authentication for admin and client
+  - Company (cafe) management by admin
+  - Coupon issuance by admin for companies
+  - Coupon collection by clients
+  - Barcode generation and validation
+  - Rule-based reward system (e.g., 10 coupons = 1 coffee)
+- **Future Enhancements:**
+  - Customizable reward rules per company
+  - Analytics/dashboard for admins
+  - Notification system for clients
+  - Multi-language support
+  - Integration with POS systems
+]
 
 # Logical Dependency Chain
-[Define the logical order of development:
-- Which features need to be built first (foundation)
-- Getting as quickly as possible to something usable/visible front end that works
-- Properly pacing and scoping each feature so it is atomic but can also be built upon and improved as development approaches]
+[
+- Set up FastAPI project with uv and MongoDB connection
+- Implement user authentication (admin/client)
+- Create company management endpoints
+- Implement coupon issuance and barcode logic
+- Develop coupon collection and validation endpoints
+- Add rule-based reward redemption logic
+- (Enhancements) Add analytics, notifications, integrations
+]
 
 # Risks and Mitigations  
-[Identify potential risks and how they'll be addressed:
-- Technical challenges
-- Figuring out the MVP that we can build upon
-- Resource constraints]
+[
+- **Technical challenges:**
+  - Barcode generation/validation: Use established libraries and thorough testing
+  - Rule flexibility: Design data models to support customizable rules
+- **MVP scope:**
+  - Focus on core coupon and reward logic before enhancements
+- **Resource constraints:**
+  - Prioritize features for MVP, defer enhancements
+]
 
 # Appendix  
 [Include any additional information:
