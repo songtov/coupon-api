@@ -1,16 +1,22 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from app.db import db
 
-app = FastAPI()
-
-@app.on_event("startup")
-async def startup_db_client():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
     await db.connect_to_mongodb()
-
-@app.on_event("shutdown")
-async def shutdown_db_client():
+    yield
+    # Shutdown
     await db.close_mongodb_connection()
+
+app = FastAPI(
+    title="Coupon API",
+    description="A FastAPI-based coupon management system for cafes",
+    version="1.0.0",
+    lifespan=lifespan
+)
 
 @app.get("/health", tags=["Health"])
 async def health_check():
-    return {"status": "ok"}
+    return {"status": "ok", "message": "Coupon API is running"}

@@ -1,0 +1,25 @@
+[project]
+name = "coupon-api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "songtov", email = "songchiho777@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.12",
+    "motor>=3.7.1",
+    "passlib[bcrypt]>=1.7.4",
+    "pydantic-settings>=2.9.1",
+    "python-jose[cryptography]>=3.4.0",
+    "python-multipart>=0.0.20",
+    "uvicorn>=0.34.2",
+]
+
+[project.scripts]
+coupon-api = "coupon_api:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
