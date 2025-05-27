@@ -19,9 +19,17 @@ class UserCreate(UserBase):
 
 
 class UserInDB(UserBase):
-    id: str = Field(..., alias="_id")
+    id: Optional[str] = Field(None, alias="_id")
     hashed_password: str
     
 
 class User(UserBase):
     id: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str

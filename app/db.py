@@ -17,3 +17,6 @@ db = Database()
 
 async def get_database() -> AsyncIOMotorDatabase:
     return db.database
+
+async def get_db() -> AsyncIOMotorDatabase:
+    return db.database
