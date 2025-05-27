@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv run pytest tests/test_schemas_user.py::TestUserSchemas::test_create_user -v)",
+      "Bash(uv run pytest:*)"
+    ],
+    "deny": []
+  }
+}
