@@ -9,7 +9,12 @@ class CompanyBase(BaseModel):
     
 
 class CompanyCreate(CompanyBase):
-    admin_id: str
+    pass
+
+
+class CompanyUpdate(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
     
 
 class CompanyInDB(CompanyBase):
