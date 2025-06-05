@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field
+from typing import Optional
 
 
 class CouponRuleBase(BaseModel):
@@ -9,6 +10,12 @@ class CouponRuleBase(BaseModel):
 
 class CouponRuleCreate(CouponRuleBase):
     pass
+
+
+class CouponRuleUpdate(BaseModel):
+    company_id: Optional[str] = None
+    required_coupons: Optional[int] = None
+    reward: Optional[str] = None
     
 
 class CouponRuleInDB(CouponRuleBase):

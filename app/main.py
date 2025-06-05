@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from app.db import db
 from app.api.auth import router as auth_router
 from app.api.company import router as company_router
+from app.api.coupon_rule_router import router as coupon_rule_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -21,6 +22,7 @@ app = FastAPI(
 
 app.include_router(auth_router, prefix="/api/auth", tags=["Authentication"])
 app.include_router(company_router, prefix="/api/companies", tags=["Companies"])
+app.include_router(coupon_rule_router, prefix="/api/coupon-rules", tags=["Coupon Rules"])
 
 @app.get("/health", tags=["Health"])
 async def health_check():
