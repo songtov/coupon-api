@@ -1,7 +1,7 @@
 [project]
 name = "coupon-api"
 version = "0.1.0"
-description = "Add your description here"
+description = "FastAPI coupon management API"
 readme = "README.md"
 authors = [
     { name = "songtov", email = "songchiho777@gmail.com" }
